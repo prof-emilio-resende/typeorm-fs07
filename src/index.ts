@@ -1,6 +1,7 @@
 import { Not } from "typeorm"
 import { AppDataSource } from "./data-source"
 import { User } from "./entity/User"
+import { Post } from "./entity/Post"
 
 AppDataSource.initialize().then(async () => {
     console.log("Searching for current users...")
@@ -72,6 +73,12 @@ AppDataSource.initialize().then(async () => {
         }
     )
     console.log(usrPostInnerJoinResult)
+
+    const p = new Post()
+    p.title = 'My Title'
+    p.text = 'Text text text'
+    p.user = usrPostSelectJoinResult
+    const createdPost = await AppDataSource.manager.save(p)
 
     const usrPostInnerJoinResultDeclarative = await AppDataSource.manager
         .createQueryBuilder(User, "usr")

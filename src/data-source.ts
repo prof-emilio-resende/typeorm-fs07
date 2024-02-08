@@ -9,7 +9,7 @@ export const AppDataSource = new DataSource({
     type: "sqlite",
     database: "database.sqlite",
     synchronize: true,
-    logging: false,
+    logging: "all",
     entities: [User, Post],
     migrations: [CreateUserMigration, CreatePost1707348716524],
     subscribers: [],
